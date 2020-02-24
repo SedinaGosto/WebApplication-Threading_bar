@@ -1,0 +1,81 @@
+﻿@using WebApplication6.ViewModels
+@model RezervacijaIndexVM
+@{
+    ViewData["Title"] = "PregledajRzerevacije";
+
+}
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"> Pocetna </li>
+
+    <li class="breadcrumb-item active">
+
+        Pregledaj rezervacije
+    </li>
+</ol>
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+
+<table class="table table-bordered dataTable" id="dataTable">
+    <thead>
+        <tr>
+            <th>Klijent</th>
+            <th>Datum rezervacije</th>
+            <th>Vrijeme termina</th>
+            <th>Tretman</th>
+
+            <th>Akcija</th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+
+
+        @foreach (var x in Model.rows)
+        {
+
+            <tr>
+
+
+                <td>@x.Klijent</td>
+                <td>@x.DatumRezervacije</td>
+                <td>@x.Termin</td>
+                <td>@x.Naziv</td>
+                @if (!x.Odobrena)
+                {
+
+                    <td>
+                        <a asp-controller="Notifikacija" asp-action="Odobri" asp-route-id="@x.RezervacijaId" class="btn btn-outline-success"><i class="fas fa-check-circle"></i> Odobri rezervaciju</a>
+
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+
+
+
+            </tr>
+
+        }
+
+
+
+
+    </tbody>
+
+
+
+</table>
+
+<hr />
+
+
+
+

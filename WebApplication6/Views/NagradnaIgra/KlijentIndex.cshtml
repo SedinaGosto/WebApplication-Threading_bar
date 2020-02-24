@@ -1,0 +1,77 @@
+﻿@using WebApplication6.ViewModels
+@model NagradnaIgraIndexVM
+
+@{
+    ViewData["Title"] = "KlijentIndex";
+    int brojac = 0;
+    Layout = "_Layout1";
+}
+<head>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"> Pocetna </li>
+
+    <li class="breadcrumb-item active">
+
+      Nagradne igre
+    </li>
+</ol>
+<hr />
+<hr />
+
+
+<table class="table table-bordered dataTable" id="dataTable">
+    <thead>
+        <tr>
+
+            <th>Nagrada</th>
+            <th>Slika</th>
+            <th>Evidentirao nagradu</th>
+            <th>Osnivac</th>
+            <th>Datum pocetka</th>
+            <th>Datum zavrsetka</th>
+
+        </tr>
+
+
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+            brojac++;
+            <tr>
+
+
+                <td>@x.Nagrada</td>
+                <td>   <img src="@x.Slika" style="width:35%"></td>
+                <td>@x.Administrator</td>
+                <td>@x.Klijent</td>
+                <td>@x.DatumPocetka</td>
+                <td>@x.DatumZavrsetka</td>
+
+
+              
+
+
+
+            </tr>
+
+        }
+
+
+
+    </tbody>
+
+
+
+</table>
+<hr />
+
+
+
+
+
+
+

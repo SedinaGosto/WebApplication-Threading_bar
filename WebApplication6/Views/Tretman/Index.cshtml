@@ -1,0 +1,133 @@
+﻿@using WebApplication6.ViewModels
+@model TretmanIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+
+}
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"> Pocetna </li>
+
+        <li class="breadcrumb-item active">
+
+            Tretmani
+        </li>
+    </ol>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+    <table class="table table-bordered dataTable" id="dataTable" >
+        <thead>
+            <tr>
+                 <th rowspan="1" colspan="1">Naziv </th>
+                                <th rowspan="1" colspan="1">Cijena</th>
+                          
+
+
+                                <th rowspan="1" colspan="1">Akcija</th>
+            </tr>
+
+
+        </thead>
+        <tbody>
+            @foreach (var x in Model.rows)
+            {
+              
+              
+                                <tr>
+
+                                  
+                                    <td>@x.Naziv</td>
+                                    <td>@x.Cijena KM</td>
+
+                                    <td>
+                                        <a class="btn btn-outline-danger" asp-controller="Tretman" asp-action="Obrisi" asp-route-id="@x.TretmanID"><i class="fas fa-trash-restore-alt"></i>Obrisi</a>
+                                        <a class="btn btn-outline-info" asp-controller="Tretman" asp-action="Uredi" asp-route-id="@x.TretmanID"><i class="far fa-edit"></i>Uredi</a>
+                                    </td>
+
+
+
+                                </tr>
+
+            }
+
+
+
+        </tbody>
+
+
+
+    </table>
+<hr />
+
+    <div>
+
+
+        <a id="btnShowModal"
+           class="btn btn-secondary" style="margin-bottom:1%; float:right; margin-right:2%;color:white">
+            <i class="fas fa-notes-medical"></i>
+            Dodaj tretman
+        </a>
+
+        <div class="modal fade" tabindex="-1" id="loginModal"
+             data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Novi tretman</h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            ×
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Tretman/Snimi" method="post">
+                            @Html.AntiForgeryToken()
+                            <input asp-for="tretman.TretmanID" hidden />
+                            <div class="form-group">
+                                <label>Naziv</label>
+                                <input asp-for="tretman.Naziv" class="form-control" required       oninvalid="this.setCustomValidity('Polje je obavezno!')" 
+onchange="this.setCustomValidity('')">
+                                <span asp-validation-for="tretman.Naziv" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cijena</label>
+                                <input asp-for="tretman.Cijena" class="form-control"   required       oninvalid="this.setCustomValidity('Polje je obavezno!')" 
+onchange="this.setCustomValidity('')" type="number"/> KM
+                                <span asp-validation-for="tretman.Cijena" class="text-danger" ></span>
+
+                            </div>
+
+                            <input type="submit" value="Snimi" class="btn btn-secondary" />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnShowModal").click(function () {
+            $("#loginModal").modal('show');
+        });
+
+        $("#btnHideModal").click(function () {
+            $("#loginModal").modal('hide');
+        });
+
+  
+    });
+    </script>
+
+
+

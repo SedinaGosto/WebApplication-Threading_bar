@@ -1,0 +1,40 @@
+﻿@using WebApplication6.ViewModels;
+@model IEnumerable<NotifVM.Row>
+
+
+@{
+    ViewData["Title"] = "Notifikacije";
+    int trenutna = (int)ViewData["TrenutnaStranica"];
+}
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"> Pocetna </li>
+
+    <li class="breadcrumb-item active">
+
+       Zahtjevi za rezervacije
+    </li>
+</ol>
+
+@foreach (var i in Model)
+{
+    <div class="alert alert-warning" role="alert" style="overflow:auto">
+        <strong>Rzervacija za @i.NazivKlijenta - @i.tretman</strong> <br />
+
+        Kreirana je nova rezervacija na dan "@i.Termin".  <a asp-action="OznaciProcitano" asp-route-id="@i.NotifikacijaId" class="">Odobri rezervaciju.</a>
+    </div>
+}
+<div class="clearfix">
+    @if (trenutna > 1)
+    {
+        <a class="btn btn-secondary float-left" href="/Notifikacija/Notifikacije?VelicinaStranice=5&TrenutnaStranica=@(trenutna-1)"> &larr; Novije notifikacije </a>
+
+
+    }
+    @if (!(Model.Count() < 5))
+    {
+        <a class="btn btn-secondary float-right" href="/Notifikacija/Notifikacije?TrenutnaStranica=@(trenutna + 1)&VelicinaStranice=5">Starije notifikacije &rarr;</a>
+    }
+
+</div>
+

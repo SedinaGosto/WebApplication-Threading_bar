@@ -1,0 +1,75 @@
+﻿@using WebApplication6.ViewModels
+@model GradIndexVM
+@{
+    ViewData["Title"] = "Index";
+    int brojac = 0;
+    int ID=0 ;
+       Layout = "_Layout";
+}
+
+<h2>Prikaz Gradova</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Rb.</th>
+            <th>Naziv</th>
+            <th>Akcija</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+            brojac++;
+
+
+        <tr>
+            @{
+
+
+                ID = x.GradID;
+            }
+
+
+            <td>@brojac</td>
+            <td>@x.Naziv</td>
+            <td>
+              
+                <a href="#" id="Obrisi" ajax-id="@x.GradID" class="btn btn-danger">Obrisi</a>
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>
+<a id="Dodaj" class="btn btn-success">Dodaj grad</a>
+<script>
+
+
+    $("a[id = Obrisi]").on('click', function () {
+$.get("/Grad/Obrisi?ID="+@ID, function (rezultat, status) {
+            $("#nekiID").html(rezultat);
+        });
+
+
+    }
+    );
+
+
+
+    $("#Dodaj").on('click', function () {
+
+        $.get('/Grad/Dodaj', function (rezultat, status) {
+            $("#nekiID").html(rezultat);
+            $("#card-header").html(status);
+        });
+
+
+    }
+    );
+
+
+</script>

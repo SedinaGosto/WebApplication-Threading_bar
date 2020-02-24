@@ -1,0 +1,52 @@
+﻿@using WebApplication6.ViewModels
+@model GradDodajVM
+
+@{
+    ViewData["Title"] = "Dodaj";
+       Layout = null;
+}
+<h5 style="text-align:center">Novi grad</h5>
+<hr />
+<style>
+    input[type=submit] {
+        width: 80%;
+        color: white;
+        padding: 10px 15px;
+        margin-left: 10%;
+        margin-bottom: 1%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .formDiv {
+        border: 1px solid white;
+        padding: 3%;
+        border-radius: 10px;
+        background-color: white;
+        margin: 10%;
+        margin-top: 0%;
+        margin-bottom: 3%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
+<div class="formDiv">
+    <form asp-action="Snimi" method="post">
+        @Html.AntiForgeryToken()
+
+        <input asp-for="GradID" type="hidden" />
+        <div class="form-group">
+            <label>Naziv</label>
+            <input asp-for="Naziv" class="form-control" />
+            <span asp-validation-for="Naziv"></span>
+        </div>
+
+
+
+        <input type="submit" class="btn btn-secondary" value="Dodaj" />
+    </form>
+</div>
+
+
+
+   

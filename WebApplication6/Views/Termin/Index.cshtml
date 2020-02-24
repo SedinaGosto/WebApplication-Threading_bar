@@ -1,0 +1,87 @@
+﻿@using WebApplication6.ViewModels
+@model TerminIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+
+}
+    <head>
+       
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"> Pocetna </li>
+
+        <li class="breadcrumb-item active ">
+
+            Termini
+        </li>
+    
+    </ol>
+
+
+    <table class="table table-bordered dataTable" id="dataTable"  >
+        <thead>
+            <tr>
+
+                <th>Uposlenik</th>
+                <th>Vrijeme termina</th>
+                <th>Rezervisan</th>
+                <th>Akcija</th>
+            </tr>
+
+
+        </thead>
+        <tbody>
+            @foreach (var x in Model.rows)
+            {
+
+                <tr>
+
+
+                    <td>@x.Uposlenik</td>
+                    <td>@x.VrijemeTermina</td>
+                    @if (x.Rezervisan)
+                    {
+                        <td>
+                            <a asp-controller="Termin" asp-action="Promijeni" asp-route-id="@x.TerminID" class="btn btn-outline-danger"><i class="fas fa-times"></i> DA</a>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-controller="Termin" asp-action="Promijeni" asp-route-id="@x.TerminID" class="btn btn-outline-success"><i class="fas fa-check"></i> NE </a>
+                        </td>
+                    }
+
+
+                    <td>
+                        <a asp-controller="Termin" asp-action="Remove" asp-route-id="@x.TerminID" class="btn btn-outline-danger"><i class="fas fa-trash-restore-alt"></i> Obrisi</a>
+                       
+                    </td>
+
+
+
+                </tr>
+
+            }
+
+
+
+        </tbody>
+
+
+
+    </table>
+<hr />
+
+<a asp-controller="Termin" asp-action="Dodaj" class="btn btn-secondary" style="margin-bottom:1%;float:right"><i class="fas fa-plus-circle"></i> Novi termin</a>
+
+
+
+
+
+

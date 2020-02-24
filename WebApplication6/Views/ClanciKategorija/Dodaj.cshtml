@@ -1,0 +1,30 @@
+﻿@using WebApplication6.ViewModels
+@model ClanciKategorijaDodaj
+@{
+    ViewData["Title"] = "Dodaj";
+      Layout = "_Layout";
+}
+
+<h5>Nova kategorija</h5>
+<hr />
+
+<form action="/ClanciKategorija/Snimi" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label>Naziv</label>
+        <input asp-for="Naziv" class="form-control"/>
+        <span asp-validation-for="Naziv"></span>
+    </div>
+
+    <div class="form-group">
+        <label>DatumKreiranja</label>
+        <input asp-for="DatumKreiranja" class="form-control" />
+        <span asp-validation-for="DatumKreiranja"></span>
+
+    </div>
+
+
+
+    <input type="submit" value="Dodaj" class="btn btn-secondary" />
+
+</form>

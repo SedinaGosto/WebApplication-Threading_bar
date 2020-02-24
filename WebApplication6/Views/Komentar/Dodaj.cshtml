@@ -1,0 +1,44 @@
+﻿@using WebApplication6.ViewModels
+@model KomentarDodajVM
+@{
+    ViewData["Title"] = "Dodaj";
+    Layout = null;
+}
+
+
+<style>
+
+        textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+</style>
+<form asp-action="Snimi" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="KlijentId" hidden />
+    <input asp-for="KorisnikId" hidden />
+    <input asp-for="DatumKreiranja" class="form-control" hidden />
+
+
+
+
+        <div class="form-group">
+            <label>Komentar</label>
+            <textarea asp-for="TekstKomentara" class="form-control" placeholder="Komentar...."></textarea>
+
+        </div>
+
+
+
+
+
+
+    <input type="submit" value="Dodaj" class="btn btn-secondary" />
+
+</form>

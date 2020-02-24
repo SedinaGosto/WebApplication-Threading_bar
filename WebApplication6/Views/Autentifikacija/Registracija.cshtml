@@ -1,0 +1,158 @@
+﻿@model WebApplication6.ViewModels.RegistracijaVM
+@{
+    ViewData["Title"] = "Registracija";
+    Layout = null;
+    string error_poruka = (string)TempData["error_poruka"];
+
+}
+
+
+
+
+
+
+
+<head>
+    <title>Threading bar "Lejla Habibija"</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Login_lyout/Login_v18/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body style="background-color:black">
+
+
+    <div class="limiter">
+        <div class="container-login100" style="margin-top:0px;">
+            <div class="wrap-login100" style="margin-top:0px;">
+
+                <form id="Formid" style="margin-top:0px;" class="login100-form validate-form" asp-action="SnimiRegistraciju" method="post">
+                    <h1  style="font-size:3vw;font-family:'Vladimir Script';margin-left:0px;color:gray">Threading bar "Lejla Habibija"</h1>
+                    <hr />
+                    <div>
+                        @if (error_poruka != null)
+                        {
+                        <br />
+                        <div class="alert alert-danger">
+                            @error_poruka
+                        </div>
+                        }
+                    </div>
+                    @*<span class="login100-form-title p-b-43">
+            Login to continue
+        </span>*@
+
+                    <div class="form-group">
+                        <label>Ime</label>
+                        <input asp-for="Ime" class="form-control" />
+                        <span asp-validation-for="Ime" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Prezime</label>
+                        <input asp-for="Prezime" class="form-control" />
+                        <span asp-validation-for="Prezime" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Broj telefona</label>
+                        <input asp-for="BrojTelefona" class="form-control" />
+                        <span asp-validation-for="BrojTelefona" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Grad</label>
+                        <select asp-items="Model.gradovi" asp-for="GradID" class="form-control"></select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Korisnicko ime</label>
+                        <input asp-for="korisnicko" class="form-control" />
+                        <span asp-validation-for="korisnicko" class="text-danger"></span>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Lozinka </label>
+                        <input asp-for="korisnikovalozinka" class="form-control" />
+                        <span asp-validation-for="korisnikovalozinka" class="text-danger"></span>
+
+                    </div>
+
+
+                    <div class="container-login100-form-btn" style="background-color:darkgray;border-radius:20px;">
+
+                        <input type="submit" class="login100-form-btn" value="Registruj se" style="background-color:darkgray" />
+                    </div>
+                    <hr />
+
+
+
+
+                </form>
+
+                <div class="login100-more" style="background-color:lightgray">
+                    <img src="https://i.pinimg.com/originals/ca/37/56/ca37562bf7b989fa454e795c3f90b037.jpg" style="width:100%;height:100%">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/jquery/jquery-3.2.1.min.js"></script>*@
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/animsition/js/animsition.min.js"></script>*@
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/bootstrap/js/popper.js"></script>*@
+    @*<script src="~/Login_lyout/Login_v18/vendor/bootstrap/js/bootstrap.min.js"></script>*@
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/select2/select2.min.js"></script>*@
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/daterangepicker/moment.min.js"></script>*@
+    @*<script src="~/Login_lyout/Login_v18/vendor/daterangepicker/daterangepicker.js"></script>*@
+    <!--===============================================================================================-->
+    @*<script src="~/Login_lyout/Login_v18/vendor/countdowntime/countdowntime.js"></script>*@
+    <!--===============================================================================================-->
+    <script src="~/Login_lyout/Login_v18/js/main.js"></script>
+    <script src="~/jsFIT.js"></script>
+
+</body>
+
+

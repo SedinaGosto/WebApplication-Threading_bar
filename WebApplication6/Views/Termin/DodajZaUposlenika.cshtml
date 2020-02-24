@@ -1,0 +1,40 @@
+﻿@using WebApplication6.ViewModels
+@model TerminDodajVM
+@{
+    ViewData["Title"] = "DodajZaUposlenika";
+     Layout = null;
+    string imeprezime = (string)TempData["ImeUposlenika"];
+
+
+}
+
+<h6>Novi termin</h6>
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<form asp-action="Snimi" ajax-poziv="da" ajax-rezultat="ajaxDiv" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="TerminId" hidden />
+    <input asp-for="UposlenikID" hidden />
+
+
+    <div class="form-group">
+        <label>Uposlenik</label>
+        <input value="@imeprezime" class="form-control" readonly />
+        <br />
+    </div>
+    <div class="form-group">
+
+        <label>Vrijeme termina</label>
+        <input asp-for="VrijemeTermina" class="form-control" />
+        <span asp-validation-for="VrijemeTermina"></span>
+    </div>
+
+
+
+
+    <input type="submit" value="Snimi" class="btn btn-secondary" />
+</form>
+
+

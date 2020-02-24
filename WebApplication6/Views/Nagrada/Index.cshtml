@@ -1,0 +1,50 @@
+﻿@using WebApplication6.ViewModels
+@model NagradaIndexVM
+@{
+    ViewData["Title"] = "Index";
+    int brojac = 0;
+    int ID = 0;
+       Layout = "_Layout";
+}
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+<h5> Nagrade</h5>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Rb.</th>
+            <th>Naziv</th>
+            <th>Akcija</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+            brojac++;
+
+
+            <tr>
+                @{
+
+
+                    ID = x.NagradaID;
+                }
+
+
+                <td>@brojac</td>
+                <td>@x.Naziv</td>
+                <td>
+
+                    <a asp-controller="Nagrada" asp-action="Obrisi" asp-route-id="@x.NagradaID" class="btn btn-outline-danger" ><i class="fas fa-trash-restore-alt"></i> Obrisi</a>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+<a asp-controller="Nagrada" asp-action="Dodaj" class="btn btn-secondary"><i class="fas fa-plus-circle"></i> Nova nagrada</a>

@@ -1,0 +1,93 @@
+﻿@using WebApplication6.ViewModels
+@model KlijentDodajVM
+@{
+    ViewData["Title"] = "Dodaj";
+    Layout = "_Layout1";
+    string succes = (string)TempData["succes"];
+
+}
+@if (Model.KlijentID != 0)
+{
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"> Pocetna </li>
+
+        <li class="breadcrumb-item  active">
+
+            Moj profil
+        </li>
+       
+    </ol>
+
+}
+else
+{
+    <h6 style="text-align:center">Novi klijent</h6>
+
+
+}
+<head>
+    <script src="~/jsFIT.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<style>
+    input[type=submit] {
+        width: 80%;
+        color: white;
+        padding: 10px 15px;
+        margin-left: 10%;
+        margin-bottom: 1%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .formDiv {
+        border: 1px solid white;
+        padding: 3%;
+        border-radius: 10px;
+        background-color: white;
+        margin: 10%;
+        margin-top: 0%;
+        margin-bottom: 3%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
+
+@if (succes != null)
+{
+   
+    <div class="alert alert-success">
+        @succes
+    </div>
+}
+<div class="formDiv">
+    <form asp-action="Snimi" method="post">
+        <input asp-for="KlijentID" hidden />
+        <input asp-for="GradID" hidden />
+        <div class="form-group">
+            <label>Ime</label>
+            <input asp-for="Ime" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Prezime</label>
+            <input asp-for="Prezime" class="form-control" />
+        </div>
+     
+        <div class="form-group">
+
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Broj telefona</label>
+            <input asp-for="BrojTelefona" class="form-control" />
+        </div>
+
+
+
+        <br />
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Snimi" class="btn btn-secondary" />
+    </form>
+</div>
+

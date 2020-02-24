@@ -1,0 +1,77 @@
+﻿@using WebApplication6.ViewModels
+@using WebApplication6.Helper
+@model KomentarIndexVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout1";
+    KlijentT klijent = Context.GetLogiraniKlijent();
+}
+<head>
+    <script src="~/jsFIT.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"> Pocetna </li>
+
+    <li class="breadcrumb-item ">
+
+        Recenzije
+    </li>
+    <li class="breadcrumb-item active">
+
+      Komentari
+    </li>
+</ol>
+<a class="btn btn-primary active" asp-controller="Ocjena" asp-action="Dodaj" asp-route-id="@Model.KorisnikId">Ocijeni uposlenika</a>
+<a ajax-poziv="da" ajax-rezultat="ajaxDiv" class="btn btn-primary active" asp-controller="Komentar" asp-action="Dodaj" asp-route-id="@Model.KorisnikId">Novi Komentar</a>
+<br />
+<br />
+
+<div class="w3-panel w3-leftbar w3-border-blue">
+    @if (Model.ProsjecnaOcjena > 0)
+    {
+        <p style="font-size:18px"> Prosjecna ocjena za uposlenika @Model.Korisnik je <strong>@Model.ProsjecnaOcjena</strong></p>
+    }
+    else
+    {
+        <p style="font-size:18px"> Trenutno nema evidentiranih ocjena.</p>
+
+    }
+</div>
+<br />
+
+<h6> Komentari</h6>
+<hr />
+<div id="ajaxDiv"></div>
+<br />
+<div class="container" style="background-color:lightgray">
+
+
+    @foreach (var k in Model.rows)
+    {
+
+        <div class="card">
+            <div class="card-body">
+
+
+                <strong style="font-size:18px">@k.Klijent               </strong> <br />
+
+                <span style="font-size:12px">  @k.DatumKreiranja.ToShortDateString()</span><br />
+
+                <p style="font-size:15px">@k.TekstKomentara</p>
+                @if (k.KlijentId == klijent.KlijentID)
+                {
+                    <a style="float:right;text-decoration:underline; color:dodgerblue" asp-action="UkloniKomentar" asp-route-id="@k.KomentarId">Ukloni komentar</a>
+                }
+            </div>
+        </div>
+        <hr />
+
+
+    }
+
+
+</div>
+
+

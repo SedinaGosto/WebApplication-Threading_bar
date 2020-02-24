@@ -1,0 +1,79 @@
+﻿@using WebApplication6.ViewModels
+@model KlijentIndexVM
+
+@{
+    ViewData["Title"] = "Index";
+
+    Layout = "_Layout";
+}
+<head>
+    <script src="~/jsFIT.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"> Pocetna </li>
+
+    <li class="breadcrumb-item active">
+
+        Klijenti
+    </li>
+</ol>
+<hr />
+<table class="table table-bordered dataTable" id="dataTable">
+    <thead>
+        <tr>
+            <th rowspan="1" colspan="1">Ime </th>
+            <th rowspan="1" colspan="1">Prezime</th>
+            <th rowspan="1" colspan="1">Telefon</th>
+            <th rowspan="1" colspan="1">Email</th>
+            <th rowspan="1" colspan="1">Korisničko ime</th>
+            <th rowspan="1" colspan="1">Grad</th>
+
+
+            <th rowspan="1" colspan="1">Akcija</th>
+        </tr>
+
+
+    </thead>
+    <tbody>
+        @foreach (var x in Model.rows)
+        {
+
+
+            <tr role="row" class="odd">
+                <td>@x.Ime</td>
+                <td>@x.Prezime</td>
+                <td>@x.BrojTelefona</td>
+                <td>@x.Email</td>
+                <td>@x.KorisnickoIme</td>
+                <td>@x.Grad</td>
+
+                <td>
+                    <a asp-controller="Klijent" asp-action="Obrisi" asp-route-id="@x.KlijentID" class="btn btn-outline-danger"><i class="fas fa-trash-restore-alt"></i> Obrisi</a>
+
+                   
+                    <a ajax-poziv="da" ajax-rezultat="ajaxDiv" asp-controller="Rezervacija" asp-action="Index" asp-route-id="@x.KlijentID" class="btn btn-outline-info"><i class="fas fa-calendar"></i>Rezervacije</a>
+
+                </td>
+
+            </tr>
+
+
+        }
+
+
+
+    </tbody>
+
+
+
+</table>
+<hr />
+<div id="ajaxDiv">
+
+
+</div>
+
+
+
+

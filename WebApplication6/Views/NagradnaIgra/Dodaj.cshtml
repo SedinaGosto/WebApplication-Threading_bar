@@ -1,0 +1,108 @@
+﻿@using WebApplication6.ViewModels
+@model NagradnaIgraDodajVM
+@{
+    ViewData["Title"] = "Dodaj";
+    Layout = "_Layout";
+}
+@if (Model.NagradnaIgraID != 0)
+{
+    <h5>Uredi informacije o nagradnoj igri</h5>
+    <hr />
+
+}
+else
+{
+    <h6 style="text-align:center">Nova nagradna igra</h6>
+    <hr />
+
+
+}
+<head>
+
+    <script src="~/jsFIT.js"></script>
+</head>
+<style>
+    input[type=submit] {
+        width: 80%;
+        color: white;
+        padding: 10px 15px;
+        margin-left: 10%;
+        margin-bottom: 1%;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .formDiv {
+        border: 1px solid white;
+        padding: 3%;
+        border-radius: 10px;
+        background-color: white;
+        margin: 10%;
+        margin-top: 0%;
+        margin-bottom: 3%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+</style>
+<div class="formDiv">
+    <form action="/NagradnaIgra/Snimi" method="post">
+        @Html.AntiForgeryToken()
+        <input asp-for="NagradnaIgraID" hidden />
+        <input asp-for="AdministratorID" hidden />
+        <div class="form-group">
+            <label>Datum pocetka</label>
+            <input type="date" asp-for="DatumPocetka" class="form-control" />
+            <span asp-validation-for="DatumPocetka"></span>
+        </div>
+        <div class="form-group">
+            <label>Datum Zavrsetka</label>
+            <input type="date" asp-for="DatumZavrsetka" class="form-control" />
+            <span asp-validation-for="DatumZavrsetka"></span>
+
+        </div>
+        <div class="form-group">
+            <label>Opis</label>
+            <input asp-for="Opis" class="form-control" />
+            <span asp-validation-for="Opis" class="text-danger"></span>
+
+        </div>
+
+        <div>
+            <label>Nagrada</label>
+            <select asp-items="Model.Nagrade" asp-for="NagradaID" class="form-control"></select>
+            <hr />
+            <a ajax-poziv="da" ajax-rezultat="ajaxDiv" asp-controller="Nagrada" asp-action="Dodaj" style="color:black"><i class="fas fa-plus-circle"></i> Dodaj nagradu</a>
+            <hr />
+
+        </div>
+
+        <div id="ajaxDiv">
+
+
+        </div>
+
+        <div class="form-group">
+            <label>Administrator</label>
+            <input asp-for="Administrator" readonly class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <label>Klijent</label>
+            <select asp-items="Model.Klijenti" asp-for="KlijentID" class="form-control" c></select>
+
+        </div>
+
+
+        <input type="submit" value="Snimi" class="btn btn-secondary" />
+    </form>
+    </div>
+    <script>
+        $.get("/Nagrada/Dodaj", function (data, status) {
+            $("#ajaxDiv").html(data);
+        });
+        });
+    </script>
+
+
+

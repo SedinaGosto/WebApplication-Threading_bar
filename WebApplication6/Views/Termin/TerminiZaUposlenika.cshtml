@@ -1,0 +1,97 @@
+﻿@using WebApplication6.ViewModels
+@model TerminIndexVM
+@{
+    ViewData["Title"] = "TerminiZaUposlenika";
+    Layout = null;
+      int id = (int)TempData["UposlenikId"];
+}
+
+
+    <head>
+    
+            <script src="~/jsFIT.js"></script>
+        
+ 
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+
+
+
+    <table class="table table-bordered dataTable" id="dataTable" >
+        <thead>
+            <tr>
+                <th>Vrijeme termina</th>
+                <th>Rezervisan</th>
+                <th>Akcija</th>
+            </tr>
+
+
+        </thead>
+        <tbody>
+            @foreach (var x in Model.rows)
+            {
+
+                <tr>
+
+
+
+                    <td>@x.VrijemeTermina</td>
+                    @if (x.Rezervisan)
+                    {
+                        <td>
+                            <a  ajax-poziv="da" ajax-rezultat="ajaxDiv" asp-controller="Termin" asp-action="PromijeniRezervaciju" asp-route-id="@x.TerminID" class="btn btn-outline-danger"><i class="fas fa-times"></i> DA</a>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a ajax-poziv="da" ajax-rezultat="ajaxDiv"  asp-controller="Termin" asp-action="PromijeniRezervaciju" asp-route-id="@x.TerminID" class="btn btn-outline-success"><i class="fas fa-check"></i> NE </a>
+                        </td>
+                    }
+
+
+                    <td>
+                        <a ajax-poziv="da" ajax-rezultat="ajaxDiv"  asp-controller="Termin" asp-action="Obrisi" asp-route-id="@x.TerminID" class="btn btn-outline-danger"><i class="fas fa-trash-restore-alt"></i> Obrisi</a>
+                        <a ajax-poziv="da" ajax-rezultat="ajaxDiv" asp-controller="Termin" asp-action="Dodaj" asp-route-id="@x.TerminID" class="btn btn-outline-info"><i class="far fa-edit"></i> Uredi</a>
+                    </td>
+
+
+
+                </tr>
+
+            }
+
+
+
+        </tbody>
+
+
+
+    </table>
+<hr />
+
+    <a  asp-controller="Termin" asp-action="DodajZaUposlenika" asp-route-id="@id" class="btn btn-secondary" ajax-poziv="da" ajax-rezultat="ajaxDiv" style="float:right;margin-bottom:1%" ><i class="fas fa-plus-circle"></i> Novi termin</a>
+
+
+<script>
+
+    $(document).ready(function () {
+
+     if ( $.fn.dataTable.isDataTable('#dataTable' ) ) {
+         table.destroy();
+  
+}
+        $('#dataTable').DataTable({
+        
+        language: {
+            url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Croatian.json'
+        }
+        ,
+        "iDisplayLength": 5,
+        "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Svi podaci"]]
+    });
+});
+</script>
+

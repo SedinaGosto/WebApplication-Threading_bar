@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+      Layout = "_Layout1";
+        string error_poruka = (string)TempData["error_poruka"];
+}
+    <div>
+        @if (error_poruka != null)
+        {
+            <br />
+            <div class="alert alert-danger">
+                @error_poruka
+            </div>
+        }
+    </div>
+

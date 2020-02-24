@@ -1,0 +1,23 @@
+﻿@using WebApplication6.ViewModels
+@model UposlenikUrediVM
+@{
+    ViewData["Title"] = "PregledTermina";
+}
+
+
+
+<p>Ime uposlenika: <b>@Model.Ime  @Model.Prezime</b></p>
+<hr />
+
+
+<div id="ajaxDiv">
+ 
+
+</div>
+
+<script>
+    $.get("/Termin/TerminiZaUposlenika/@Model.KorisnikId", function (data,status) {
+        $("#ajaxDiv").html(data);
+    });
+</script>
+

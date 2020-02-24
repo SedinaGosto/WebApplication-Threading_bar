@@ -1,0 +1,282 @@
+﻿    @using WebApplication6.ViewModels
+@using WebApplication6.Models
+@using Microsoft.AspNetCore.Http;
+@using WebApplication6.Helper
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+@{
+    Korisnik lozinka = Context.GetLogiraniKorisnik();
+
+    KlijentT klijent = Context.GetLogiraniKlijent();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Threading bar "Lejla Habibija" </title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+          crossorigin="anonymous">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/fontawesome-free/css/all.min.css">
+
+     @*Page level plugin CSS*@
+    <link href="~/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template-->
+    <link href="~/css/sb-admin.css" rel="stylesheet">
+
+
+    <script src="~/jsFIT.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+            <div>
+
+                <a class="navbar-brand mr-1" asp-controller="Home" asp-action="Index" style="font-family:'Vladimir Script'">Threading bar "Lejla Habibija"</a>
+            </div>
+
+            <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Navbar Search -->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                @*<div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>*@
+            </form>
+
+            <!-- Navbar -->
+       
+            <ul class="navbar-nav ml-auto ml-md-0" >
+
+                <li class="nav-item dropdown no-arrow" >
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        <span>
+                            @if (lozinka?.KorisnickoIme != null)
+                            {
+                                <label>@lozinka.KorisnickoIme</label>
+                            }
+                            @if (klijent?.KorisnickoIme != null)
+                            {
+                                <label>@klijent.KorisnickoIme-LogOut</label>
+                            }
+                        </span>
+
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Autentifikacija" asp-action="Logout" data-toggle="modal" data-target="#logoutModal">
+                            <label>Odjavi se</label>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-controller="Uposlenik" asp-action="PromijeniLozinku" >
+                            <label>Promijeni lozinku!</label>
+                        </a>
+                    </div>
+                 
+                </li>
+            </ul>
+ 
+
+        </nav>
+
+
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <ul class="sidebar navbar-nav" style="background-color:#212529;">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-fw fa-home" style="color:lightgray"></i>
+                        <span style="color:lightgray;font-family:fantasy">Početna</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Notifikacija" ? "active" : "") ">
+                    <a class="nav-link" href="/Notifikacija/Notifikacije">
+                        <i class="fas fa-bell"></i>
+                        <span>Zahtjevi za rezervaciju</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Clanak" ? "active" : "") ">
+                    <a class="nav-link" href="/Clanak/Index">
+                        <i class="far fa-newspaper"></i>
+                        <span>Članak</span>
+                    </a>
+                </li>
+
+                <li class="nav-item " style="margin-top:20px" @(controllerName == "Klijent" ? "active" : "") ">
+                    <a class="nav-link" href="/Klijent/Index">
+                        <i class="fas fa-users"></i>
+                        <span>Klijent</span>
+                    </a>
+                </li>
+
+                <li class="nav-item " style="margin-top:20px" @(controllerName == "NagradnaIgra" ? "active" : "") ">
+                    <a class="nav-link" href="/NagradnaIgra/Index">
+                        <i class="fas fa-gifts"></i>
+                        <span>Nagradna igra</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Tretman" ? "active" : "") ">
+                    <a class="nav-link" href="/Tretman/Index">
+                        <i class="fas fa-notes-medical"></i>
+                        <span>Tretman</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Uposlenik" ? "active" : "") ">
+                    <a class="nav-link" href="/Uposlenik/Index">
+                        <i class="fas fa-user-nurse"></i>
+                        <span>Uposlenici</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Termin" ? "active" : "") ">
+                    <a class="nav-link" href="/Termin/Index">
+                        <i class="fas fa-user-clock"></i>
+                        <span>Termini</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Rezervacija" ? "active" : "") ">
+                    <a class="nav-link" href="/Rezervacija/PregledajRzerevacije">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Pregledaj Rezervacije</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="margin-top:20px" @(controllerName == "Komentar" ? "active" : "") ">
+                    <a class="nav-link" href="/Komentar/UposleniciIndex">
+                        <i class="fas fa-star"></i>
+                        <span>Recenzije</span>
+                    </a>
+                </li>
+
+
+
+            </ul>
+
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+
+
+
+
+
+                    @RenderBody()
+
+                </div>
+                <!-- /.container-fluid -->
+                <!-- Sticky Footer -->
+                <footer class="sticky-footer">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span style="font-weight:bold;text-decoration:underline">
+                                Mostar: Franjevačka 13A,
+
+                                Sarajevo: TC Robot Socijalno<br />
+                                <br />
+                                Threading bar d.o.o © 2019
+
+
+
+                            </span>
+
+                        </div>
+                    </div>
+
+                </footer>
+
+            </div>
+            <!-- /.content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+        <!-- Scroll to Top Button-->
+        @*<a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>*@
+
+
+
+
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Da li se želite odjaviti?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Kliknite na odjavi se, ukoliko ste sigurni.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Otkaži</button>
+                        <a class="btn btn-primary" asp-controller="Autentifikacija" asp-action="Logout">Odjavi se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      
+      
+
+        <!-- Core plugin JavaScript-->
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Page level plugin JavaScript-->
+        <script src="~/vendor/chart.js/Chart.min.js"></script>
+        <script src="~/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="~/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="~/js/sb-admin.min.js"></script>
+    
+
+        <!-- Demo scripts for this page-->
+        <script src="~/js/demo/datatables-demo.js"></script>
+        <script src="~/js/demo/chart-area-demo.js"></script>
+
+
+    </div>
+</body>
+</html>
